@@ -17,7 +17,8 @@ args = parser.parse_args()
 num = randint(1,16)
 
 if num > 3:
-    sys.exit('Not now, we rolled ' + str(num))
+    print(u'Not now, we rolled ' + str(num)
+    sys.exit()
 
 markov = MarkovGenerator()
 markov.json_load(args.inputjson)
