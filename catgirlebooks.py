@@ -18,7 +18,7 @@ num = randint(1,16)
 
 if num > 3:
     print(u'Not now, we rolled ' + str(num)
-    sys.exit()
+    sys.exit(1)
 
 markov = MarkovGenerator()
 markov.json_load(args.inputjson)
