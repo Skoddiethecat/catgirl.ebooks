@@ -352,67 +352,7 @@ class MarkovGenerator():
                 else:
                     # If the key is not in the database dict yet, first
                     # make a new list for it, and then add the new word
-                    self.data[database][key] = [w3]  
-    
-    def set_simple_responses(self, respdict, overwrite=False):
-        
-        """Adds
-        
-        Arguments
-        
-        respdict        -    A dict that has keys that exactly match
-                        intended target strings for auto-replying.
-                        Each key points to a list of possible
-                        replies (strings) to the intended target
-                        string. One reply will be chosen at random
-                        if the twitter_autoreply_start is called
-                        with database='simpleresponse'.
-                        Alternatively, values in the respdict can
-                        also be single strings, which will then
-                        always be used to reply to the intended
-                        target string.
-        
-        Keyword Arguments
-        
-        overwrite        -    Boolean that indicates whether the existing data
-                        should be overwritten (True) or not (False). The
-                        default value is False.
-        """
-        
-        # Check if the 'simpleresponse' database already exists, and
-        # create it if necessary.
-        if not u'simpleresponse' in self.data.keys():
-            self.data[u'simpleresponse'] = {}
-        
-        # Overwrite the database if requested.
-        if overwrite:
-            self.data[u'simpleresponse'] = {}
-        
-        # Go through the passed respdict, and add its content to the
-        # database.
-        for targetstring in respdict.keys():
-            # Skip non-text values.
-            if type(targetstring) not in [str, unicode]:
-                self._message(u'set_simple_responses', \
-                    u"Key '%s' in passed respdict is not a string or unicode type, and thus will not be included in the database." % (targetstring))
-                continue
-            # Check if the value for this targetstring is text.
-            if type(respdict[targetstring]) in [str,unicode]:
-                # Convert to a tuple, and add to the database.
-                self.data[u'simpleresponse'][targetstring] = \
-                    (respdict[targetstring])
-            # Check if the value for this targetstring is a list or a
-            # tuple.
-            elif type(respdict[targetstring]) in [list,tuple]:
-                # Copy the values, convert them all to unicode.
-                responses = map(unicode, list(respdict[targetstring]))
-                # Add the responses to the database.
-                self.data[u'simpleresponse'][targetstring] = \
-                    tuple(responses)
-            # For any other data type, report a warning.
-            else:
-                self._message(u'set_simple_responses', \
-                    u"Key '%s' in passed respdict points to invalid data. Values need to be of type str, unicode, list, or tuple." % (targetstring))
+                    self.data[database][key] = [w3]
 
     def _check_file(self, filename, allowedext=None):
         
@@ -512,7 +452,7 @@ class MarkovGenerator():
         message        -    String with the error message.
         """
         
-        raise Exception(u"ERROR in Markovgenerator.%s: %s" % (methodname, msg))
+        raise Exception(u"ERROR in MarkovGenerator.%s: %s" % (methodname, msg))
 
 
     def _isalphapunct(self, string):
@@ -555,7 +495,7 @@ class MarkovGenerator():
         message        -    String with the error message.
         """
         
-        print(u"MSG from Markovbot.%s: %s" % (methodname, msg))
+        print(u"MSG from MarkovGenerator.%s: %s" % (methodname, msg))
 
     def _triples(self, words):
     
